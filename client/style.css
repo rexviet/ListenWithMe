@@ -28,3 +28,6 @@ body {
     border: 2px solid black;
     background:  gray;
 }
+.list-musics .col-md-5 {
+    border:  2px solid;
+}

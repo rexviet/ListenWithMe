@@ -6,4 +6,5 @@ npm-debug.log
 nbproject/
 build/
 server/config.js
+client/js/configs.js
 uploads/

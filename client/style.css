@@ -6,7 +6,7 @@ nav.navbar.navbar-default.navbar-fixed-top {
 }
 
 body {
-    background:  url(img/intro-bg.jpg) no-repeat center;
+    background:  url(img/intro-bg.jpg) no-repeat center scroll;
 }
 
 .navbar-default .navbar-brand {
@@ -16,4 +16,15 @@ body {
 
 .form-control {
     background: dimgray;
+}
+.footer{
+	background: black;
+}
+
+.list-musics{
+	margin-top: 15%;
+}
+.col-md-4 {
+    border: 2px solid black;
+    background:  gray;
 }

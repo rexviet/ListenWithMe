@@ -27,11 +27,11 @@ exports.init = (server) => {
     // console.log('connected:', Object.keys(io.sockets.sockets));
     socket.on('disconnect', () => {
       if(socket.isMaster) {
-        console.log('master disconnected, random new master');
+        console.log('master disconnected');
         PlayerServices.unsetMasterPlayer();
         let connectedSockets = Object.keys(io.sockets.sockets);
         let newMaster = getRandomItem(connectedSockets);
-        console.log(newMaster);
+        console.log('random new master:', newMaster);
         if(newMaster) {
           PlayerServices.setMasterPlayerSocketID(socket.id);
           io.sockets.sockets[newMaster].isMaster = true;

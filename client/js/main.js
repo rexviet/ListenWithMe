@@ -1,35 +1,11 @@
+var player;
+
 $(document).ready(function(){
-	// var iframe = $('iframe.embedly-embed');
-	// console.log('iframe:', iframe);
-	// var player = new playerjs.Player(iframe);
+	getSongs()
+		.then(results => renderFistSong(results));
 
-	// player.on(playerjs.Events.PLAY, function() {
-	// 	console.log('play');
-	// });
 
-	// player.on('ready', function(){
-	//   // Seek to 20 seconds in.
-	//   // player.setCurrentTime(20);
-	//   console.log('ready');
-	// });
 
-	// $('iframe.embedly-embed').each(function(){
-	//   // initialize the player.
-	//   var player = new playerjs.Player(this);
-	  
-	//   // Wait for the player to be ready.
-	//   player.on('ready', function(){
-	    
-	//     // Listen to the play event.
-	//     player.on('play', function(){
-	//       // Tell Google analytics that a video was played.
-	//       window.ga('send', 'event', 'Video', 'Play');
-	//     });
-	  
-	//     //autoplay the video.
-	//     player.play();
-	//   });
-	// });
 });
 
 function getJSON(url) {
@@ -52,15 +28,37 @@ function onButtonClicked() {
 	});
 }
 
-function onPlay() {
- 	// var iframe = $('iframe.embedly-embed');							// khong duoc
-	var iframe = document.querySelector('iframe.embedly-embed');	// duoc
-	var player = new playerjs.Player(iframe);
+function initPlayer() {
+  let iframe = document.querySelector('iframe.embedly-embed');
+  player = new playerjs.Player(iframe);
+  player.on('ready', function(){
+    console.log('ready');
 
-	 player.on('ready', function(){
-    	console.log('ready');
-	   
-	    //autoplay the video.
-	    player.play();
-  	});
+    //autoplay the video.
+    // player.play();
+
+    player.getCurrentTime((time) => {
+      console.log('time:', time);
+    })
+  });
+}
+
+function getSongs() {
+	return $.getJSON(configs.BASE_URL + '/api/songs');
+}
+
+function renderFistSong(songResults) {
+	if(songResults.success) {
+		let songs = songResults.data;
+		let firstSong = songs[0];
+		console.log('firstSong:', firstSong);
+		let html = firstSong.html;
+    let i = html.indexOf("//cdn");
+    let head = html.substring(0, i);
+    let tail = html.substring(i);
+    html = head + "http:" + tail;
+    $("#player").html(html);
+
+    initPlayer();
+	}
 }

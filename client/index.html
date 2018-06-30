@@ -4,6 +4,7 @@
 	<title>Listen With Me</title>
 	<script src="js/configs.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/mustache.min.js"></script>
   	<script type="text/javascript" src="js/main.js"></script>
   	<script type="text/javascript" src="http://cdn.embed.ly/player-0.0.11.min.js"></script>
   <meta charset="utf-8">
@@ -19,40 +20,40 @@
 	<script type="text/javascript" src="js/player.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">REX</a>
-		</div>
+<!--<nav class="navbar navbar-default navbar-fixed-top" role="navigation">-->
+	<!--<div class="container">-->
+		<!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+		<!--<div class="navbar-header">-->
+			<!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">-->
+				<!--<span class="sr-only">Toggle navigation</span>-->
+				<!--<span class="icon-bar"></span>-->
+				<!--<span class="icon-bar"></span>-->
+				<!--<span class="icon-bar"></span>-->
+			<!--</button>-->
+			<!--<a class="navbar-brand" href="#">REX</a>-->
+		<!--</div>-->
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Link">
-				</div>
-				<button type="submit" class="btn btn-default"><i class="fas fa-plus-circle"> Submit</i></button>
-			</form>
-		</div><!-- /.navbar-collapse -->
-	</div>
-</nav>
+		<!--&lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+		<!--<div class="collapse navbar-collapse navbar-ex1-collapse">-->
+			<!--<form class="navbar-form navbar-left" role="search">-->
+				<!--<div class="form-group">-->
+					<!--<input type="text" class="form-control" placeholder="Link">-->
+				<!--</div>-->
+				<!--<button type="submit" class="btn btn-default"><i class="fas fa-plus-circle"> Submit</i></button>-->
+			<!--</form>-->
+		<!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+	<!--</div>-->
+<!--</nav>-->
 
-<div class="list-musics">
+<!-- <div class="list-musics">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-7">
 				<div class="Video">
 					<table width="100%">
 						<div id="player">
-		<!--<iframe class="embedly-embed" src="http://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FhprGqCxs3xI%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhprGqCxs3xI&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FhprGqCxs3xI%2Fhqdefault.jpg&key=internal&type=text%2Fhtml&schema=youtube" width="854" height="480" scrolling="no" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>-->
-						</div>	
+		<!--<iframe class="embedly-embed" src="http://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FhprGqCxs3xI%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhprGqCxs3xI&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FhprGqCxs3xI%2Fhqdefault.jpg&key=internal&type=text%2Fhtml&schema=youtube" width="854" height="480" scrolling="no" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+						</div>
 					</table>
 				</div>
 			</div>
@@ -70,8 +71,50 @@
 						</table>
 					</li>
 				</ul>
-			</div> <!-- end col -->
+			</div> <!-- end col
 		</div>
+	</div>
+</div>  -->
+
+<div class="row">
+	<div class="column" id="player" style="background-color:#aaa;">
+
+	</div>
+	<div class="column" id="sampleArea" style="background-color:#bbb;">
+		<!--<section>-->
+			<!--<div class="container">-->
+		<script id="hidden-template" type="text/x-custom-template">
+			<div style="margin-top: 10px;">
+				<div class="row align-items-center" style="border: 1px solid">
+					<div class="column">
+						<img width="100%" alt="Grandfather with child" src={{thumbnail_url}}>
+					</div>
+					<div class="column">
+						<div style="margin-left: 0px">
+							<h3>{{title}}</h3>
+							<p>{{description}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--<div class="card">-->
+				<!--<div class="row">-->
+					<!--<div class="col-md-6">-->
+						<!--<div class="card-img-bottom">-->
+							<!--<img src={{thumbnail_url}}>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="col-md-6">-->
+						<!--<div class="card-block">-->
+							<!--<h4 class="card-title">{{title}}</h4>-->
+							<!--<p class="card-text">{{description}}</p>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		</script>
+			<!--</div>-->
+		<!--</section>-->
 	</div>
 </div>
 
@@ -86,8 +129,11 @@
 
 	<!-- <div id="player">
 		<iframe class="embedly-embed" src="http://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FhprGqCxs3xI%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhprGqCxs3xI&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FhprGqCxs3xI%2Fhqdefault.jpg&key=internal&type=text%2Fhtml&schema=youtube" width="854" height="480" scrolling="no" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
-	
+
 
 	<!--<button onclick="onButtonClicked()">Click me</button>-->
+
+
+
 </body>
 </html>

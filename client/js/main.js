@@ -1,6 +1,9 @@
 $(document).ready(function(){
 	getSongs()
-		.then(results => renderFistSong(results));
+		.then(results => {
+      renderFistSong(results);
+      renderListSongs(results.data);
+		});
 
 
 
@@ -48,4 +51,12 @@ function renderFistSong(songResults) {
 
     initPlayer();
 	}
+}
+
+function renderListSongs(songs) {
+  let template = $('#hidden-template').html();
+  songs.forEach(song => {
+		let html = Mustache.to_html(template, song);
+    $('#sampleArea').append(html);
+	});
 }

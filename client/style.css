@@ -6,7 +6,7 @@ nav.navbar.navbar-default.navbar-fixed-top {
 }
 
 body {
-    background:  url(img/intro-bg.jpg) no-repeat center scroll;
+    /*background:  url(img/intro-bg.jpg) no-repeat center scroll;*/
 }
 
 .navbar-default .navbar-brand {
@@ -30,4 +30,25 @@ body {
 }
 .list-musics .col-md-5 {
     border:  2px solid;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.card-img-bottom {
+    color: #fff;
+    height: 20rem;
+    background: center no-repeat;
+    background-size: cover;
 }

@@ -11,6 +11,6 @@ exports.init = () => {
   io.on('connection', (socket) => {
     let str = 'A client connected on instance ' + (process.env.NODE_APP_INSTANCE || '0');
     console.log(str);
-    io.emit('noti', {str});
+    
   });
 };

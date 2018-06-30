@@ -6,3 +6,7 @@ export function toObjectByKey(arr, key) {
     return result;
   }, {});
 }
+
+export function getRandomItem(arr) {
+  return _.sample(arr);
+}

@@ -5,6 +5,8 @@ const Schema = mongoose.Schema;
 const songSchema = new Schema({
   title: {type: String},
   url: {type: String},
+  thumbnail_url: {type: String},
+  description: {type: String},
   html: {type: String},
   added_at: {type: Date, default: Date.now, index: 1}
 });

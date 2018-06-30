@@ -15,16 +15,22 @@ export async function dummySongs() {
       {
         title: 'While Your Lips Are Still Red | Nightwish | Lyrics [Kara + Vietsub HD]',
         url: 'http://www.youtube.com/watch?v=hprGqCxs3xI',
+        thumbnail_url: "https://i.ytimg.com/vi/hprGqCxs3xI/hqdefault.jpg",
+        description: "\" Link download: http://bit.ly/1LOfmMu \" Ask me?: http://ask.fm/nguyenthanh269 ● \"J.K\" - Joker ● \" Channel 1: http://goo.gl/qwQNAs \" Channel 2: http://goo.gl/sTu1QH \" We Love Proshow: http://goo.gl/Kz38Xq \" I Love Music: http://goo.gl/uDDcHv \" Images Of PSP: http://goo.gl/i0hzda \" Contact Us: jkvevolution@gmail.com \" Chúc các bạn có những giây phút vui vẻ ♥ \" Software Support: Proshow Producer v5.1 & Aegisub v3.02 Don't forget to LIKE, SUBSCRIBE, COMMENT and RATE.\n",
         html: "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FhprGqCxs3xI%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhprGqCxs3xI&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FhprGqCxs3xI%2Fhqdefault.jpg&key=internal&type=text%2Fhtml&schema=youtube\" width=\"500\" height=\"281\" scrolling=\"no\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen></iframe>",
       },
       {
         title: "Passenger | Let Her Go (Official Video)",
         url: "http://www.youtube.com/watch?v=RBumgq5yVrA",
+        thumbnail_url: "https://i.ytimg.com/vi/RBumgq5yVrA/hqdefault.jpg",
+        description: "Pre-order Passenger's new album 'Runaway' - https://Passenger.lnk.to/RunawayID Tour Tickets on sale now - https://passengermusic.com/live/ 'Let Her Go' from the album 'All the Little Lights' - https://Passenger.lnk.to/AllTheLittleLightsID *** The official video for 'Let Her Go' - Directed and Produced by Dave Jansen.\n",
         html: "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FRBumgq5yVrA%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DRBumgq5yVrA&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FRBumgq5yVrA%2Fhqdefault.jpg&key=internal&type=text%2Fhtml&schema=youtube\" width=\"500\" height=\"281\" scrolling=\"no\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen></iframe>"
       },
       {
         title: "Forever | Stratovarius | Lyrics [Kara + Vietsub HD]",
         url: "http://www.youtube.com/watch?v=87oTHfSaR10",
+        thumbnail_url: "https://i.ytimg.com/vi/87oTHfSaR10/hqdefault.jpg",
+        description: "\" Ask me?: http://ask.fm/nguyenthanh269 ● Follow me: ----------------------------------------­­------------------------------ \" We Love Proshow: http://goo.gl/Kz38Xq \" Music Of Life: http://goo.gl/qwQNAs \" JK Music Channel: http://goo.gl/egrLUF \" Facebook: facebook.com/nguyenthanh269 \" Twitter: twitter.com/nguyenthanh269 \" Youtube: youtube.com/jkvevolution \" Mail: jkvevolution@gmail.com Don't forget to LIKE, SUBSCRIBE, COMMENT and RATE. Hope you all enjoy!\n",
         html: "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F87oTHfSaR10%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D87oTHfSaR10&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F87oTHfSaR10%2Fhqdefault.jpg&key=internal&type=text%2Fhtml&schema=youtube\" width=\"500\" height=\"281\" scrolling=\"no\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen></iframe>"
       }
     ];

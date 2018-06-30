@@ -23,9 +23,6 @@ mongoose.Promise = global.Promise;
   }
 }) ();
 
-// SocketIO
-initSocket();
-
 // Kue and KueUI
 Queue.init(configs.kue, configs.kueUI);
 
@@ -45,6 +42,10 @@ if(configs.useExpressStatic) {
 }
 
 const server = http.createServer(app);
+
+// SocketIO
+initSocket(server);
+
 
 server.listen(configs.serverPort, async () => {
   console.log('server is listening on port', configs.serverPort);

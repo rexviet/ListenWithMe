@@ -28,6 +28,7 @@ exports.init = (server) => {
     socket.on('disconnect', () => {
       if(socket.isMaster) {
         console.log('master disconnected, random new master');
+        PlayerServices.unsetMasterPlayer();
         let connectedSockets = Object.keys(io.sockets.sockets);
         let newMaster = getRandomItem(connectedSockets);
         console.log(newMaster);

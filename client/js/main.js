@@ -1,5 +1,3 @@
-var player;
-
 $(document).ready(function(){
 	getSongs()
 		.then(results => renderFistSong(results));
@@ -28,20 +26,7 @@ function onButtonClicked() {
 	});
 }
 
-function initPlayer() {
-  let iframe = document.querySelector('iframe.embedly-embed');
-  player = new playerjs.Player(iframe);
-  player.on('ready', function(){
-    console.log('ready');
 
-    //autoplay the video.
-    // player.play();
-
-    player.getCurrentTime((time) => {
-      console.log('time:', time);
-    })
-  });
-}
 
 function getSongs() {
 	return $.getJSON(configs.BASE_URL + '/api/songs');
@@ -53,10 +38,12 @@ function renderFistSong(songResults) {
 		let firstSong = songs[0];
 		console.log('firstSong:', firstSong);
 		let html = firstSong.html;
-    let i = html.indexOf("//cdn");
-    let head = html.substring(0, i);
-    let tail = html.substring(i);
-    html = head + "http:" + tail;
+		if(configs.ENV === 'local') {
+      let i = html.indexOf("//cdn");
+      let head = html.substring(0, i);
+      let tail = html.substring(i);
+      html = head + "http:" + tail;
+    }
     $("#player").html(html);
 
     initPlayer();

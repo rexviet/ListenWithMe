@@ -23,6 +23,7 @@ exports.init = (server) => {
       console.log('ask master:');
       emitToSocketID(masterPlayerSocketID, 'get_time', {newPlayer: socket.id});
     }
+    socket.emit('connection_rs', !!socket.isMaster);
 
     // console.log('connected:', Object.keys(io.sockets.sockets));
     socket.on('disconnect', () => {
@@ -39,6 +40,10 @@ exports.init = (server) => {
           console.log('no more master :(');
         }
       }
+    });
+
+    socket.on('get_time_rs', data => {
+      emitToSocketID(data.player, 'get_time_rs', data.time);
     })
   });
 };

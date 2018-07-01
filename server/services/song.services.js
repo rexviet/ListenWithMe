@@ -66,7 +66,7 @@ export async function addSong(url) {
 
 async function getURLInfo(url) {
   try {
-    let requestUrl = `https://api.embedly.com/1/oembed?url=${url}&key=${configs.embedly_key}`;
+    let requestUrl = `https://api.embedly.com/1/oembed?url=${url}&key=${configs.embedly_key}&width=850&height=480`;
     let data = await request(requestUrl);
     return JSON.parse(data);
   } catch (err) {

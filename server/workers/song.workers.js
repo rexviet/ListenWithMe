@@ -17,6 +17,7 @@ mongoose.Promise = global.Promise;
         let url = job.data.url;
         let song = await addSong(url);
         // console.log('song:', song);
+        console.log('added song', song.title, 'to queue.');
         return done(null);
       } catch (err) {
         console.log('err on job new_song:', err);

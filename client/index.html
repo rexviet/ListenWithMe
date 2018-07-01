@@ -76,47 +76,45 @@
 	</div>
 </div>  -->
 
-<div class="row">
-	<div class="column" id="player" style="background-color:#aaa;">
-
-	</div>
-	<div class="column" id="sampleArea" style="background-color:#bbb;">
-		<!--<section>-->
-			<!--<div class="container">-->
-		<script id="hidden-template" type="text/x-custom-template">
-			<div class="card" style="margin-top: 10px;">
-				<div class="row align-items-center" style="border: 1px solid">
-					<div class="column">
-						<img width="100%" alt="Grandfather with child" src={{thumbnail_url}}>
-					</div>
-					<div class="column">
-						<div style="margin-left: 0px">
-							<h3>{{title}}</h3>
-							<p>{{description}}</p>
-						</div>
-					</div>
-				</div>
+<div id="content" 	class="container">
+	<div class="row">
+		<div id="song-playing" class="col-md-6">
+			<div class="column" id="player" style="background-color:#aaa; width: 100%;height: auto;">
 			</div>
-			<!--<div class="card">-->
-				<!--<div class="row">-->
-					<!--<div class="col-md-6">-->
-						<!--<div class="card-img-bottom">-->
-							<!--<img src={{thumbnail_url}}>-->
-						<!--</div>-->
-					<!--</div>-->
-					<!--<div class="col-md-6">-->
-						<!--<div class="card-block">-->
-							<!--<h4 class="card-title">{{title}}</h4>-->
-							<!--<p class="card-text">{{description}}</p>-->
-						<!--</div>-->
-					<!--</div>-->
+		</div>
+		<div  id="list-song" class="col-md-6">
+			<div class="column" id="sampleArea" style="background-color:#bbb; width: 100%;height: auto;">
+			<!--<section>-->
+				<!--<div class="container">-->
+			<script id="hidden-template" type="text/x-custom-template">
+					<ul style="list-style:none;">
+						<li>
+							<div class="row">
+								<div id="picture" class="col-md-4">
+									<div class="column">
+										<img width="100%" alt="Grandfather with child" src={{thumbnail_url}}>
+									</div>
+								</div>
+								<div id="title" class="col-md-8">
+									<div class="column">
+										<div>
+											<h3>{{title}}</h3>
+										</div>
+									</div>
+								</div>
+							</div><!--end row -->
+							<div class="clear"></div>
+						</li>
+					</ul>
+			</script>
 				<!--</div>-->
-			<!--</div>-->
-		</script>
-			<!--</div>-->
-		<!--</section>-->
+			<!--</section>-->
+			</div>
+		</div>
+		<div class="clear"></div>
 	</div>
 </div>
+
 
 <!-- <footer>
 	<div class="footer">

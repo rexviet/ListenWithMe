@@ -1,4 +1,4 @@
-*{margin:0;padding:0; }
+*{margin:0;padding:0; box-sizing: border-box; }
 nav.navbar.navbar-default.navbar-fixed-top {
     background:  none;
     border:  none;
@@ -24,19 +24,16 @@ body {
 .list-musics{
 	margin-top: 15%;
 }
-.col-md-4 {
-    border: 2px solid black;
-    background:  gray;
-}
+
 .list-musics .col-md-5 {
     border:  2px solid;
 }
 
 .column {
     float: left;
-    width: 50%;
+    width: 100%;
     padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
+    height: 150px; /* Should be removed. Only for demonstration */
 }
 
 /* Clear floats after the columns */
@@ -51,4 +48,25 @@ body {
     height: 20rem;
     background: center no-repeat;
     background-size: cover;
+}
+.card-img-top {
+    width: 400px;
+    height: 270px;    ;
+}
+#picture {
+    float: left;
+}
+#title {
+    float: right;
+    font-size: 12px;
+}
+.clear {
+    clear: both;
+}
+#content {
+    margin-top: 10%;
+}
+#title h3 {
+    font-size:  17px;
+    font-weight: bold;
 }

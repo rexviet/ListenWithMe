@@ -1,22 +1,32 @@
-var player;
+let player;
 
 function initPlayer() {
-  let iframe = document.querySelector('iframe.embedly-embed');
-  player = new playerjs.Player(iframe);
-  player.on('ready', function(){
-    console.log('ready');
-    if(!configs.SOCKET_INIT) {
-      initSocket();
-    }
-    //autoplay the video.
-    // player.play();
+  return new Promise(resolve => {
+    let iframe = document.querySelector('iframe.embedly-embed');
+    player = new playerjs.Player(iframe);
+    player.on('ready', function(){
+      console.log('ready');
+      if(!configs.SOCKET_INIT) {
+        initSocket();
+      }
+      player.getPaused(function(paused){
+        console.log('Paused: '+paused);
+        if(paused) {
+          player.play();
+        }
+      });
+      // autoplay the video.
+      // player.play();
 
-    player.on('ended', function(){
-      console.log('video ended');
-      getNextSong();
-      configs.songs.shift();
-      $('#sampleArea').children().eq(1).remove();
-      renderFistSong();
+      player.on('ended', function(){
+        console.log('video ended');
+        getNextSong();
+        configs.songs.shift();
+        $('#sampleArea').children().eq(1).remove();
+        renderFistSong();
+      });
+
+      return resolve();
     });
   });
 }
@@ -30,7 +40,8 @@ function getCurrentTime() {
 }
 
 function setCurrentTime(time) {
-  return player.setCurrentTime(time)
+  console.log('set current time to:', time);
+  player.setCurrentTime(time);
 }
 
 function play() {

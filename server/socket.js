@@ -45,7 +45,7 @@ exports.init = (server) => {
     });
 
     socket.on('get_time_rs', data => {
-      emitToSocketID(data.player, 'get_time_rs', data.time);
+      emitToSocketID(data.player, 'get_time_rs', data);
     });
 
     socket.on('new_song', url => {

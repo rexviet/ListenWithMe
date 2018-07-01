@@ -16,13 +16,31 @@ function initSocket() {
   socket.on('get_time', function (data) {
     console.log('new player:', data.newPlayer);
     getCurrentTime()
-      .then(time => socket.emit('get_time_rs', {player: data.newPlayer, time}));
+      .then(time => socket.emit('get_time_rs', {player: data.newPlayer, time, song: configs.songs[0]._id}));
 
   });
 
-  socket.on('get_time_rs', function (time) {
-    console.log('time:', time);
-    setCurrentTime(time);
+  socket.on('get_time_rs', function (data) {
+    console.log('data:', data);
+
+    let songIndex = findItemByProp(configs.songs, '_id', data.song);
+    console.log('songIndex:', songIndex);
+    if(songIndex !== false) {
+      configs.songs.splice(0, songIndex);
+      $('#sampleArea').find('ul').each((i, elm) => {
+        if(i < songIndex) {
+          $(elm).remove();
+        }
+      });
+      renderFistSong()
+        .then(() => {
+          console.log('render first song done.');
+          setCurrentTime(data.time);
+          console.log('play now');
+          player.play();
+        });
+
+    }
   });
 }
 

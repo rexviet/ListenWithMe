@@ -4,8 +4,8 @@ $(document).ready(function(){
 		.then(results => {
 			if(results.success) {
 				configs.songs = results.data;
-        renderFistSong(results);
-        renderListSongs(results.data);
+        renderFistSong();
+        renderListSongs();
       }
 		});
 
@@ -25,21 +25,24 @@ function getSongs() {
 }
 
 function renderFistSong() {
-	let firstSong = configs.songs[0];
-  console.log('firstSong:', firstSong);
-  if (firstSong) {
-    let html = firstSong.html;
-    if (configs.ENV === 'local') {
-      let i = html.indexOf("//cdn");
-      let head = html.substring(0, i);
-      let tail = html.substring(i);
-      html = head + "http:" + tail;
-    }
-    $("#player").html(html);
+  return new Promise(resolve => {
+    let firstSong = configs.songs[0];
+    console.log('firstSong:', firstSong);
+    if (firstSong) {
+      let html = firstSong.html;
+      if (configs.ENV === 'local') {
+        let i = html.indexOf("//cdn");
+        let head = html.substring(0, i);
+        let tail = html.substring(i);
+        html = head + "http:" + tail;
+      }
+      $("#player").html(html);
 
-		initPlayer();
-    play();
-  }
+      initPlayer()
+        .then(() => resolve());
+      // play();
+    }
+  });
 }
 
 function renderListSongs() {
@@ -60,11 +63,6 @@ function submitSong() {
 	console.log('valid url:', input);
   inputElm.val('');
   emit('new_song', input);
-}
-
-const YTB_REG = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
-function isValidURL(url) {
-	return YTB_REG.test(url);
 }
 
 function getNextSong() {

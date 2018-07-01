@@ -7,6 +7,8 @@ $(document).ready(function(){
         renderListSongs(results.data);
       }
 		});
+
+	$('.btnSubmit').on('click', submitSong);
 });
 
 function getJSON(url) {
@@ -45,4 +47,20 @@ function renderListSongs() {
 		let html = Mustache.to_html(template, song);
     $('#sampleArea').append(html);
 	});
+}
+
+function submitSong() {
+	let inputElm = $('.inputSong');
+	let input = inputElm.val().replace(/\s+/g, '').trim();
+	let valid = isValidURL(input);
+	if(!valid) {
+		alert("Invalid URL");
+	}
+	console.log('valid url:', input);
+  inputElm.val('');
+}
+
+const YTB_REG = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
+function isValidURL(url) {
+	return YTB_REG.test(url);
 }

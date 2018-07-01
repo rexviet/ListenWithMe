@@ -13,6 +13,7 @@ function initPlayer() {
 
     player.on('ended', function(){
       console.log('video ended');
+      getNextSong();
       configs.songs.shift();
       $('#sampleArea').children().eq(1).remove();
       renderFistSong();

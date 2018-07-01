@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	console.log('hello');
 	getSongs()
 		.then(results => {
 			if(results.success) {
@@ -64,4 +65,20 @@ function submitSong() {
 const YTB_REG = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
 function isValidURL(url) {
 	return YTB_REG.test(url);
+}
+
+function getNextSong() {
+	let lastSongId = configs.songs[configs.songs.length - 1]._id;
+  $.getJSON(configs.BASE_URL + '/api/songs?lastSong=' + lastSongId + '&limit=1')
+		.then(result => {
+      if(result.success) {
+        let nextSong = result.data[0];
+        configs.songs.push(nextSong);
+
+        // render to list
+        let template = $('#hidden-template').html();
+        let html = Mustache.to_html(template, nextSong);
+        $('#sampleArea').append(html);
+      }
+		});
 }

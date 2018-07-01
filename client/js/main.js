@@ -58,6 +58,7 @@ function submitSong() {
 	}
 	console.log('valid url:', input);
   inputElm.val('');
+  emit('new_song', input);
 }
 
 const YTB_REG = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;

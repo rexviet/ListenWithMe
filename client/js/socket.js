@@ -25,3 +25,7 @@ function initSocket() {
     setCurrentTime(time);
   });
 }
+
+function emit(event, data) {
+  return socket.emit(event, data);
+}

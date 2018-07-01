@@ -29,5 +29,7 @@ export default {
   },
   kueUI: {
     port: 3052
-  }
+  },
+
+  embedly_key: 'YOUR_KEY'
 };

@@ -1,4 +1,6 @@
 import Songs from '../models/songs';
+import request from 'request-promise';
+import configs from '../config';
 
 export async function getSongs() {
   try {
@@ -39,5 +41,31 @@ export async function dummySongs() {
   } catch (err) {
     console.log('err on dummySongs:', err);
     return Promise.reject({status: 500, error: 'Internal error.'});
+  }
+}
+
+export async function addSong(url) {
+  try {
+    let data = await getURLInfo(url);
+    return await Songs.create({
+      title: data.title,
+      url: data.url,
+      thumbnail_url: data.thumbnail_url,
+      description: data.description,
+      html: data.html,
+    });
+  } catch (err) {
+    console.log('err on addSong:', err);
+    return Promise.reject({status: 500, error: 'Internal error.'});
+  }
+}
+
+async function getURLInfo(url) {
+  try {
+    let requestUrl = `https://api.embedly.com/1/oembed?url=${url}&key=${configs.embedly_key}`;
+    let data = await request(requestUrl);
+    return JSON.parse(data);
+  } catch (err) {
+    throw err;
   }
 }

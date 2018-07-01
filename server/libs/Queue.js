@@ -1,24 +1,21 @@
-import kue from 'kue';
-import requireDir from 'require-dir';
+import kue from 'kue-scheduler';
+import configs from '../config'
 
-let queue, queueUI;
 let instance = null;
 
 export default class Queue {
   constructor() {
     this.time = Date.now();
+    this.queue = kue.createQueue(configs.kue);
   }
 
-  static init(kueConfigs, kueUIConfigs) {
-    queue = kue.createQueue(kueConfigs);
-    queueUI = kue.app;
-    queueUI.set('title', 'Kue Service');
-    queueUI.listen(kueUIConfigs.port, function () {
-      console.log('Queue listening on port:', kueUIConfigs.port);
+  initUI() {
+    // queue = kue.createQueue(kueConfigs);
+    this.queueUI = kue.app;
+    this.queueUI.set('title', 'Kue Service');
+    this.queueUI.listen(configs.kueUI.port, function () {
+      console.log('Queue listening on port:', configs.kueUI.port);
     });
-
-    // import all workers
-    requireDir('./workers');
   }
 
   static getInstance() {
@@ -33,10 +30,10 @@ export default class Queue {
   }
 
   getQueue() {
-    return queue;
+    return this.queue;
   }
 
   pushJob(jobTitle, data) {
-    queue.create(jobTitle, data).removeOnComplete(true).save();
+    this.queue.create(jobTitle, data).removeOnComplete(true).save();
   }
 }

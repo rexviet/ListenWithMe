@@ -24,7 +24,7 @@ mongoose.Promise = global.Promise;
 }) ();
 
 // Kue and KueUI
-Queue.init(configs.kue, configs.kueUI);
+Queue.getInstance().initUI();
 
 // Express
 const app = express();

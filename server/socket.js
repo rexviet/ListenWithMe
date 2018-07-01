@@ -1,6 +1,7 @@
 import SocketIO from 'socket.io';
 import * as PlayerServices from './services/player.services';
 import {getRandomItem} from "./utils/ArrayHelper";
+import Queue from './libs/Queue';
 
 let io = null;
 
@@ -44,7 +45,12 @@ exports.init = (server) => {
 
     socket.on('get_time_rs', data => {
       emitToSocketID(data.player, 'get_time_rs', data.time);
-    })
+    });
+
+    socket.on('new_song', url => {
+      console.log('song url:', url);
+      Queue.getInstance().pushJob('new_song', {url});
+    });
   });
 };
 

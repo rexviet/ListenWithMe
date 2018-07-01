@@ -71,7 +71,7 @@ function getNextSong() {
 	let lastSongId = configs.songs[configs.songs.length - 1]._id;
   $.getJSON(configs.BASE_URL + '/api/songs?lastSong=' + lastSongId + '&limit=1')
 		.then(result => {
-      if(result.success) {
+      if(result.success && result.data.length) {
         let nextSong = result.data[0];
         configs.songs.push(nextSong);
 

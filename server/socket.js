@@ -1,6 +1,7 @@
 import SocketIO from 'socket.io';
 import * as PlayerServices from './services/player.services';
 import {getRandomItem} from "./utils/ArrayHelper";
+import {isValidURL} from "./utils/StringHelper";
 import Queue from './libs/Queue';
 
 let io = null;
@@ -49,7 +50,9 @@ exports.init = (server) => {
 
     socket.on('new_song', url => {
       console.log('song url:', url);
-      Queue.getInstance().pushJob('new_song', {url});
+      if(isValidURL(url)) {
+        Queue.getInstance().pushJob('new_song', {url});
+      }
     });
   });
 };

@@ -5,10 +5,18 @@ function initPlayer() {
   player = new playerjs.Player(iframe);
   player.on('ready', function(){
     console.log('ready');
-    initSocket();
+    if(!configs.SOCKET_INIT) {
+      initSocket();
+    }
     //autoplay the video.
     // player.play();
 
+    player.on('ended', function(){
+      console.log('video ended');
+      configs.songs.shift();
+      $('#sampleArea').children().eq(1).remove();
+      renderFistSong();
+    });
   });
 }
 

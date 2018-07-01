@@ -5,8 +5,10 @@ function initSocket() {
 
   socket.on('connection_rs', function(isMaster){
     console.log('connect to server success');
+    configs.SOCKET_INIT = true;
     console.log('is master:', isMaster);
-    if(isMaster) {
+    configs.isMaster = isMaster;
+    if(configs.isMaster) {
       play();
     }
   });

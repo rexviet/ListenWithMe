@@ -1,12 +1,12 @@
 $(document).ready(function(){
 	getSongs()
 		.then(results => {
-      renderFistSong(results);
-      renderListSongs(results.data);
+			if(results.success) {
+				configs.songs = results.data;
+        renderFistSong(results);
+        renderListSongs(results.data);
+      }
 		});
-
-
-
 });
 
 function getJSON(url) {
@@ -16,32 +16,17 @@ function getJSON(url) {
 	}));
 }
 
-function onButtonClicked() {
-	getJSON("https://www.youtube.com/watch?v=hprGqCxs3xI")
-	.then(function(json) {
-		console.log('json:', json);
-		var html = json.html;
-		var i = json.html.indexOf("//cdn");
-		var head = json.html.substring(0, i);
-		var tail = json.html.substring(i);
-		html = head + "http:" + tail;
-		$("#player").html(html);
-	});
-}
-
-
 
 function getSongs() {
 	return $.getJSON(configs.BASE_URL + '/api/songs');
 }
 
-function renderFistSong(songResults) {
-	if(songResults.success) {
-		let songs = songResults.data;
-		let firstSong = songs[0];
-		console.log('firstSong:', firstSong);
-		let html = firstSong.html;
-		if(configs.ENV === 'local') {
+function renderFistSong() {
+	let firstSong = configs.songs[0];
+  console.log('firstSong:', firstSong);
+  if (firstSong) {
+    let html = firstSong.html;
+    if (configs.ENV === 'local') {
       let i = html.indexOf("//cdn");
       let head = html.substring(0, i);
       let tail = html.substring(i);
@@ -49,13 +34,14 @@ function renderFistSong(songResults) {
     }
     $("#player").html(html);
 
-    initPlayer();
-	}
+		initPlayer();
+    play();
+  }
 }
 
-function renderListSongs(songs) {
+function renderListSongs() {
   let template = $('#hidden-template').html();
-  songs.forEach(song => {
+  configs.songs.forEach(song => {
 		let html = Mustache.to_html(template, song);
     $('#sampleArea').append(html);
 	});

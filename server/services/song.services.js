@@ -2,9 +2,13 @@ import Songs from '../models/songs';
 import request from 'request-promise';
 import configs from '../config';
 
-export async function getSongs() {
+export async function getSongs(lastSongId, limit) {
   try {
-    return await Songs.find({}).sort({added_at: 1}).limit(10).lean();
+    let conditions = {};
+    if(lastSongId) {
+      conditions._id = {$gt: lastSongId};
+    }
+    return await Songs.find(conditions).sort({added_at: 1}).limit(limit).lean();
   } catch (err) {
     console.log('err on getSongs:', err);
     return Promise.reject({status: 500, error: 'Internal error.'});

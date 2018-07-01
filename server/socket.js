@@ -22,7 +22,7 @@ exports.init = (server) => {
       PlayerServices.setMasterPlayerSocketID(socket.id);
       socket.isMaster = true;
     } else {
-      console.log('ask master:');
+      console.log('ask master:', masterPlayerSocketID);
       emitToSocketID(masterPlayerSocketID, 'get_time', {newPlayer: socket.id});
     }
     socket.emit('connection_rs', !!socket.isMaster);
@@ -36,7 +36,7 @@ exports.init = (server) => {
         let newMaster = getRandomItem(connectedSockets);
         console.log('random new master:', newMaster);
         if(newMaster) {
-          PlayerServices.setMasterPlayerSocketID(socket.id);
+          PlayerServices.setMasterPlayerSocketID(newMaster);
           io.sockets.sockets[newMaster].isMaster = true;
         } else {
           console.log('no more master :(');

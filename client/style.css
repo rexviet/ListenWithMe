@@ -33,7 +33,7 @@ body {
     float: left;
     width: 100%;
     padding: 10px;
-    height: 150px; /* Should be removed. Only for demonstration */
+    height: auto; /* Should be removed. Only for demonstration */
 }
 
 /* Clear floats after the columns */
@@ -64,9 +64,15 @@ body {
     clear: both;
 }
 #content {
-    margin-top: 10%;
+    margin-top: 8%;
 }
 #title h3 {
     font-size:  17px;
     font-weight: bold;
+}
+#sampleArea {
+    list-style: none;
+    overflow: hidden;
+    overflow-y: scroll;
+
 }

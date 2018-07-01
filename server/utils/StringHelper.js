@@ -2,6 +2,7 @@ import sanitizeHtml from 'sanitize-html';
 import crypto from 'crypto';
 import queryString from 'querystring';
 
+const YTB_REG = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export function standardize(text) {
@@ -67,4 +68,11 @@ export function HMAC_SHA256(string, secret) {
 
 export function buildQueryString(object) {
   return queryString.stringify(object);
+}
+
+export function isValidURL(url) {
+  if(!url) {
+    return false;
+  }
+  return YTB_REG.test(url);
 }

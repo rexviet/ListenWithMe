@@ -74,6 +74,14 @@ async function getURLInfo(url) {
   }
 }
 
-export async function submitSongFromSlack() {
-
+export async function submitSongFromSlack(url, channel) {
+  try {
+    let song = await addSong(url);
+    let text = `Your song: "${song.title}" has been added to queue.`;
+    let requestUrl = `https://slack.com/api/chat.postMessage?token=${configs.slack_token}&channel=${channel}&text=${text}&as_user=true&pretty=1`;
+    return request(requestUrl);
+  } catch (err) {
+    console.log('err on submitSongFromSlack:', err);
+    return Promise.reject({status: 500, error: 'Internal error.'});
+  }
 }

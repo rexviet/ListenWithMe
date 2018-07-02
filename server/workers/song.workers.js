@@ -1,7 +1,7 @@
 import Queue from '../libs/Queue';
 import mongoose from 'mongoose';
 import configs from '../config';
-import {addSong} from "../services/song.services";
+import * as SongServices from "../services/song.services";
 
 const queue = Queue.getInstance().getQueue();
 
@@ -12,15 +12,29 @@ mongoose.Promise = global.Promise;
     await mongoose.connect(configs.mongoURL);
     console.log('DB connect success.');
 
-    queue.process('new_song', 10, async (job, done) => {
+    queue.process('new_song', 5, async (job, done) => {
       try {
         let url = job.data.url;
-        let song = await addSong(url);
+        let song = await SongServices.addSong(url);
         // console.log('song:', song);
         console.log('added song', song.title, 'to queue.');
         return done(null);
       } catch (err) {
         console.log('err on job new_song:', err);
+        return done(err);
+      }
+    });
+
+    queue.process('new_song_slack', 5, async (job, done) => {
+      try {
+        let url = job.data.url;
+        let channel = job.data.channel;
+
+        await SongServices.submitSongFromSlack(url, channel);
+
+        return done(null);
+      } catch (err) {
+        console.log('err on job new_song_slack:', err);
         return done(err);
       }
     });

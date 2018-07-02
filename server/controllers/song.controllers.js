@@ -1,4 +1,5 @@
 import * as SongServices from '../services/song.services';
+import Queue from '../libs/Queue';
 
 const SONG_LIMIT = 10;
 
@@ -23,6 +24,9 @@ export async function submitSong(req, res) {
     let input = req.params.input;
     console.log('input:', input);
     console.log('body:', req.body);
+
+    Queue.getInstance().pushJob(`new_song_${input}`, req.body);
+
     return res.status(200).json({success: true});
   } catch (err) {
     err.success = false;

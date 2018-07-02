@@ -1,6 +1,7 @@
 import Songs from '../models/songs';
 import request from 'request-promise';
 import configs from '../config';
+import querystring from 'querystring';
 
 export async function getSongs(lastSongId, limit) {
   try {
@@ -74,11 +75,18 @@ async function getURLInfo(url) {
   }
 }
 
+const baseQuery = {
+  token: configs.slack_token
+};
 export async function submitSongFromSlack(url, channel) {
   try {
     let song = await addSong(url);
     let text = `Your song: "${song.title}" has been added to queue.`;
-    let requestUrl = `https://slack.com/api/chat.postMessage?token=${configs.slack_token}&channel=${channel}&text=${text}&as_user=true&pretty=1`;
+    let queryOptions = Object.assign({}, baseQuery);
+    queryOptions.channel = channel;
+    queryOptions.text = text;
+    let query = querystring.stringify(queryOptions);;
+    let requestUrl = `https://slack.com/api/chat.postMessage?${query}`;
     return request(requestUrl);
   } catch (err) {
     console.log('err on submitSongFromSlack:', err);

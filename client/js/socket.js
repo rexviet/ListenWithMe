@@ -9,6 +9,7 @@ function initSocket() {
     console.log('is master:', isMaster);
     configs.isMaster = isMaster;
     if(configs.isMaster) {
+      $('.btnNext').show();
       play();
     }
   });
@@ -46,6 +47,11 @@ function initSocket() {
   socket.on('new_master', masterId => {
     configs.isMaster = socket.id.toString() === masterId.toString();
     console.log('is master:', configs.isMaster);
+    if(configs.isMaster) {
+      $('.btnNext').show();
+    } else {
+      $('.btnNext').hide();
+    }
   });
 
   socket.on('new_song', song => {

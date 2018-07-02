@@ -42,6 +42,11 @@ function initSocket() {
 
     }
   });
+
+  socket.on('new_master', masterId => {
+    configs.isMaster = socket.id.toString() === masterId.toString();
+    console.log('is master:', configs.isMaster);
+  });
 }
 
 function emit(event, data) {

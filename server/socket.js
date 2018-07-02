@@ -39,6 +39,7 @@ exports.init = (server) => {
         if(newMaster) {
           PlayerServices.setMasterPlayerSocketID(newMaster);
           io.sockets.sockets[newMaster].isMaster = true;
+          io.emit('new_master', newMaster);
         } else {
           console.log('no more master :(');
         }

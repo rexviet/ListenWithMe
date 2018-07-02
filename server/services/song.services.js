@@ -94,3 +94,12 @@ export async function submitSongFromSlack(url, channel) {
     return Promise.reject({status: 500, error: 'Internal error.'});
   }
 }
+
+export async function deleteSong(songId) {
+  try {
+    await Songs.remove({_id: songId});
+  } catch (err) {
+    console.log('err on deleteSong:', err);
+    return Promise.reject({status: 500, error: 'Internal error.'});
+  }
+}

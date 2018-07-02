@@ -1,5 +1,6 @@
 import SocketIO from 'socket.io';
 import * as PlayerServices from './services/player.services';
+import {deleteSong} from "./services/song.services";
 import {getRandomItem} from "./utils/ArrayHelper";
 import {isValidURL} from "./utils/StringHelper";
 import Queue from './libs/Queue';
@@ -53,6 +54,10 @@ exports.init = (server) => {
       if(isValidURL(url)) {
         Queue.getInstance().pushJob('new_song', {url});
       }
+    });
+
+    socket.on('delete_song', async songId => {
+      await deleteSong(songId);
     });
   });
 };

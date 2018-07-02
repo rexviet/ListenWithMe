@@ -20,6 +20,10 @@ function initPlayer() {
 
       player.on('ended', function(){
         console.log('video ended');
+        if(configs.isMaster) {
+          emit('delete_song', configs.songs[0]._id);
+        }
+
         getNextSong();
         configs.songs.shift();
         $('#sampleArea').children().eq(1).remove();

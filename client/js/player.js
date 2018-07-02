@@ -23,11 +23,11 @@ function initPlayer() {
         if(configs.isMaster) {
           emit('delete_song', configs.songs[0]._id);
         }
-
-        getNextSong();
-        configs.songs.shift();
-        $('#sampleArea').children().eq(1).remove();
-        renderFistSong();
+        playNextSong();
+        // getNextSong();
+        // configs.songs.shift();
+        // $('#sampleArea').children().eq(1).remove();
+        // renderFistSong();
       });
 
       return resolve();

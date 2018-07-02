@@ -10,6 +10,7 @@ $(document).ready(function(){
 		});
 
 	$('.btnSubmit').on('click', submitSong);
+	$('.btnNext').on('click', playNextSong);
 });
 
 function getJSON(url) {
@@ -79,4 +80,11 @@ function getNextSong() {
         $('#sampleArea').append(html);
       }
 		});
+}
+
+function playNextSong() {
+  getNextSong();
+  configs.songs.shift();
+  $('#sampleArea').children().eq(1).remove();
+  renderFistSong();
 }

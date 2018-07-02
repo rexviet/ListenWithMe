@@ -2,7 +2,8 @@ let player;
 
 function initPlayer() {
   return new Promise(resolve => {
-    let iframe = document.querySelector('iframe.embedly-embed');
+    console.log('initPlayer');
+    let iframe = document.querySelector('iframe');
     player = new playerjs.Player(iframe);
     player.on('ready', function(){
       console.log('ready');
@@ -49,5 +50,6 @@ function setCurrentTime(time) {
 }
 
 function play() {
+  console.log('PLAY');
   player.play();
 }

@@ -30,18 +30,25 @@ function renderFistSong() {
     let firstSong = configs.songs[0];
     console.log('firstSong:', firstSong);
     if (firstSong) {
-      let html = firstSong.html;
-      if (configs.ENV === 'local') {
-        let i = html.indexOf("//cdn");
-        let head = html.substring(0, i);
-        let tail = html.substring(i);
-        html = head + "http:" + tail;
+      $('iframe').attr("src", firstSong.src);
+      if(!player) {
+        initPlayer()
+          .then(() => resolve());
+      } else {
+        resolve();
       }
-      $("#player").html(html);
-
-      initPlayer()
-        .then(() => resolve());
-      // play();
+      // let html = firstSong.html;
+      // if (configs.ENV === 'local') {
+      //   let i = html.indexOf("//cdn");
+      //   let head = html.substring(0, i);
+      //   let tail = html.substring(i);
+      //   html = head + "http:" + tail;
+      // }
+      // $("#player").html(html);
+      //
+      // initPlayer()
+      //   .then(() => resolve());
+      play();
     }
   });
 }

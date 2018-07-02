@@ -76,7 +76,8 @@ async function getURLInfo(url) {
 }
 
 const baseQuery = {
-  token: configs.slack_token
+  token: configs.slack_token,
+  as_user: true
 };
 export async function submitSongFromSlack(url, channel) {
   try {

@@ -1,5 +1,6 @@
 import kue from 'kue-scheduler';
 import configs from '../config'
+import {emitToAllPlayers, emitToSocketID} from "../socket";
 
 let instance = null;
 
@@ -15,6 +16,22 @@ export default class Queue {
     this.queueUI.set('title', 'Kue Service');
     this.queueUI.listen(configs.kueUI.port, function () {
       console.log('Queue listening on port:', configs.kueUI.port);
+    });
+
+    this.queue.process('emit', 10, async (job, done) => {
+      try {
+        let to = job.data.to;
+        if (to) {
+          emitToSocketID(to, job.data.event, job.data.data);
+        } else {
+          emitToAllPlayers(job.data.event, job.data.data);
+        }
+
+        return done(null);
+      } catch (err) {
+        console.log('err on job emit:', err);
+        return done(err);
+      }
     });
   }
 

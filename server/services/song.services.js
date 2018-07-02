@@ -2,6 +2,7 @@ import Songs from '../models/songs';
 import request from 'request-promise';
 import configs from '../config';
 import querystring from 'querystring';
+import {emitToAllPlayers} from "../socket";
 
 export async function getSongs(lastSongId, limit) {
   try {
@@ -52,13 +53,15 @@ export async function dummySongs() {
 export async function addSong(url) {
   try {
     let data = await getURLInfo(url);
-    return await Songs.create({
+    // emitToAllPlayers('new_song', created);
+
+    return await new Songs({
       title: data.title,
       url: data.url,
       thumbnail_url: data.thumbnail_url,
       description: data.description,
       html: data.html,
-    });
+    }).save();
   } catch (err) {
     console.log('err on addSong:', err);
     return Promise.reject({status: 500, error: 'Internal error.'});

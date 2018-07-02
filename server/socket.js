@@ -39,7 +39,7 @@ exports.init = (server) => {
         if(newMaster) {
           PlayerServices.setMasterPlayerSocketID(newMaster);
           io.sockets.sockets[newMaster].isMaster = true;
-          io.emit('new_master', newMaster);
+          emitToAllPlayers('new_master', newMaster);
         } else {
           console.log('no more master :(');
         }
@@ -63,9 +63,14 @@ exports.init = (server) => {
   });
 };
 
-function emitToSocketID(socketID, event, data) {
+export function emitToSocketID(socketID, event, data) {
   // console.log('socketID:', socketID);
   // console.log('event:', event);
   // console.log('data:', data);
   io.to(socketID).emit(event, data);
+}
+
+export function emitToAllPlayers(event, data) {
+  // console.log('emitToAllPlayers:', event, data);
+  io.emit(event, data);
 }

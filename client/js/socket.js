@@ -47,6 +47,22 @@ function initSocket() {
     configs.isMaster = socket.id.toString() === masterId.toString();
     console.log('is master:', configs.isMaster);
   });
+
+  socket.on('new_song', song => {
+    console.log('new song receive:', song);
+    if(configs.songs.length < 10) {
+      configs.songs.push(song);
+
+      // render to list
+      let template = $('#hidden-template').html();
+      let html = Mustache.to_html(template, song);
+      $('#sampleArea').append(html);
+    }
+
+    if(configs.songs.length === 1) {
+      renderFistSong();
+    }
+  });
 }
 
 function emit(event, data) {

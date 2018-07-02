@@ -6,4 +6,7 @@ const router = new Router();
 router.route('/')
   .get(SongControllers.getSongs);
 
+router.route('/:input/')
+  .post(SongControllers.submitSong);
+
 export default router;

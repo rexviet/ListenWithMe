@@ -17,3 +17,15 @@ export async function getSongs(req, res) {
     return res.status(err.status || 500).json(err);
   }
 }
+
+export async function submitSong(req, res) {
+  try {
+    let input = req.params.input;
+    console.log('input:', input);
+    console.log('body:', req.body);
+    return res.status(200).json({success: true});
+  } catch (err) {
+    err.success = false;
+    return res.status(err.status || 500).json(err);
+  }
+}

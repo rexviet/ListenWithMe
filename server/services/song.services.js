@@ -73,3 +73,7 @@ async function getURLInfo(url) {
     throw err;
   }
 }
+
+export async function submitSongFromSlack() {
+
+}

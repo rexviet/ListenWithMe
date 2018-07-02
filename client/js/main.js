@@ -30,25 +30,27 @@ function renderFistSong() {
     let firstSong = configs.songs[0];
     console.log('firstSong:', firstSong);
     if (firstSong) {
-      $('iframe').attr("src", firstSong.src);
-      if(!player) {
-        initPlayer()
-          .then(() => resolve());
-      } else {
-        resolve();
-      }
-      // let html = firstSong.html;
-      // if (configs.ENV === 'local') {
-      //   let i = html.indexOf("//cdn");
-      //   let head = html.substring(0, i);
-      //   let tail = html.substring(i);
-      //   html = head + "http:" + tail;
+      // $('iframe').attr("src", firstSong.src);
+      // if(!player) {
+      //   initPlayer()
+      //     .then(() => resolve());
+      // } else {
+      //   play();
+      //   resolve();
       // }
-      // $("#player").html(html);
-      //
-      // initPlayer()
-      //   .then(() => resolve());
-      play();
+
+      let src = firstSong.src;
+      if (configs.ENV === 'local') {
+        let i = src.indexOf("//cdn");
+        let head = src.substring(0, i);
+        let tail = src.substring(i);
+        src = head + "http:" + tail;
+      }
+      $('iframe').attr("src", src);
+
+      initPlayer()
+        .then(() => resolve());
+      // play();
     }
   });
 }
@@ -90,6 +92,9 @@ function getNextSong() {
 }
 
 function playNextSong() {
+  if(configs.isMaster) {
+    emit('delete_song', configs.songs[0]._id);
+  }
   getNextSong();
   configs.songs.shift();
   $('#sampleArea').children().eq(1).remove();

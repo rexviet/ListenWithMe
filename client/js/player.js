@@ -21,9 +21,6 @@ function initPlayer() {
 
       player.on('ended', function(){
         console.log('video ended');
-        if(configs.isMaster) {
-          emit('delete_song', configs.songs[0]._id);
-        }
         playNextSong();
         // getNextSong();
         // configs.songs.shift();

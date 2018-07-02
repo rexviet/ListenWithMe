@@ -15,6 +15,7 @@ mongoose.Promise = global.Promise;
     queue.process('new_song', 5, async (job, done) => {
       try {
         let url = job.data.url;
+        console.log('processing new song:', url);
         let song = await SongServices.addSong(url);
         // console.log('song:', song);
         console.log('added song', song.title, 'to queue.');

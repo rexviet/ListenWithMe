@@ -9,6 +9,7 @@ const songSchema = new Schema({
   thumbnail_url: {type: String},
   description: {type: String},
   html: {type: String},
+  src: {type: String},
   added_at: {type: Date, default: Date.now, index: 1}
 });
 

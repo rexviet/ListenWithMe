@@ -2,7 +2,7 @@ import Songs from '../models/songs';
 import request from 'request-promise';
 import configs from '../config';
 import querystring from 'querystring';
-import {emitToAllPlayers} from "../socket";
+import {getYoutubeIdFromUrl} from "../utils/StringHelper";
 
 export async function getSongs(lastSongId, limit) {
   try {
@@ -26,20 +26,23 @@ export async function dummySongs() {
         thumbnail_url: "https://i.ytimg.com/vi/hprGqCxs3xI/hqdefault.jpg",
         description: "\" Link download: http://bit.ly/1LOfmMu \" Ask me?: http://ask.fm/nguyenthanh269 ● \"J.K\" - Joker ● \" Channel 1: http://goo.gl/qwQNAs \" Channel 2: http://goo.gl/sTu1QH \" We Love Proshow: http://goo.gl/Kz38Xq \" I Love Music: http://goo.gl/uDDcHv \" Images Of PSP: http://goo.gl/i0hzda \" Contact Us: jkvevolution@gmail.com \" Chúc các bạn có những giây phút vui vẻ ♥ \" Software Support: Proshow Producer v5.1 & Aegisub v3.02 Don't forget to LIKE, SUBSCRIBE, COMMENT and RATE.\n",
         html: "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FhprGqCxs3xI%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhprGqCxs3xI&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FhprGqCxs3xI%2Fhqdefault.jpg&key=internal&type=text%2Fhtml&schema=youtube\" width=\"500\" height=\"281\" scrolling=\"no\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen></iframe>",
+        src: "//cdn.embedly.com/widgets/media.html?src=https://www.youtube.com/embed/hprGqCxs3xI?feature=oembed&url=http://www.youtube.com/watch?v=hprGqCxs3xI&image=https://i.ytimg.com/vi/hprGqCxs3xI/hqdefault.jpg&type=text/html&schema=youtube"
       },
       {
         title: "Passenger | Let Her Go (Official Video)",
         url: "http://www.youtube.com/watch?v=RBumgq5yVrA",
         thumbnail_url: "https://i.ytimg.com/vi/RBumgq5yVrA/hqdefault.jpg",
         description: "Pre-order Passenger's new album 'Runaway' - https://Passenger.lnk.to/RunawayID Tour Tickets on sale now - https://passengermusic.com/live/ 'Let Her Go' from the album 'All the Little Lights' - https://Passenger.lnk.to/AllTheLittleLightsID *** The official video for 'Let Her Go' - Directed and Produced by Dave Jansen.\n",
-        html: "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FRBumgq5yVrA%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DRBumgq5yVrA&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FRBumgq5yVrA%2Fhqdefault.jpg&key=internal&type=text%2Fhtml&schema=youtube\" width=\"500\" height=\"281\" scrolling=\"no\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen></iframe>"
+        html: "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FRBumgq5yVrA%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DRBumgq5yVrA&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FRBumgq5yVrA%2Fhqdefault.jpg&key=internal&type=text%2Fhtml&schema=youtube\" width=\"500\" height=\"281\" scrolling=\"no\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen></iframe>",
+        src: "//cdn.embedly.com/widgets/media.html?src=https://www.youtube.com/embed/RBumgq5yVrA?feature=oembed&url=http://www.youtube.com/watch?v=RBumgq5yVrA&image=https://i.ytimg.com/vi/RBumgq5yVrA/hqdefault.jpg&type=text/html&schema=youtube"
       },
       {
         title: "Forever | Stratovarius | Lyrics [Kara + Vietsub HD]",
         url: "http://www.youtube.com/watch?v=87oTHfSaR10",
         thumbnail_url: "https://i.ytimg.com/vi/87oTHfSaR10/hqdefault.jpg",
         description: "\" Ask me?: http://ask.fm/nguyenthanh269 ● Follow me: ----------------------------------------­­------------------------------ \" We Love Proshow: http://goo.gl/Kz38Xq \" Music Of Life: http://goo.gl/qwQNAs \" JK Music Channel: http://goo.gl/egrLUF \" Facebook: facebook.com/nguyenthanh269 \" Twitter: twitter.com/nguyenthanh269 \" Youtube: youtube.com/jkvevolution \" Mail: jkvevolution@gmail.com Don't forget to LIKE, SUBSCRIBE, COMMENT and RATE. Hope you all enjoy!\n",
-        html: "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F87oTHfSaR10%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D87oTHfSaR10&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F87oTHfSaR10%2Fhqdefault.jpg&key=internal&type=text%2Fhtml&schema=youtube\" width=\"500\" height=\"281\" scrolling=\"no\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen></iframe>"
+        html: "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F87oTHfSaR10%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D87oTHfSaR10&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F87oTHfSaR10%2Fhqdefault.jpg&key=internal&type=text%2Fhtml&schema=youtube\" width=\"500\" height=\"281\" scrolling=\"no\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen></iframe>",
+        src: "//cdn.embedly.com/widgets/media.html?src=https://www.youtube.com/embed/87oTHfSaR10?feature=oembed&url=http://www.youtube.com/watch?v=87oTHfSaR10&image=https://i.ytimg.com/vi/87oTHfSaR10/hqdefault.jpg&type=text/html&schema=youtube"
       }
     ];
 
@@ -54,13 +57,13 @@ export async function addSong(url) {
   try {
     let data = await getURLInfo(url);
     // emitToAllPlayers('new_song', created);
-
+// console.log('data:', data);
     return await new Songs({
       title: data.title,
       url: data.url,
       thumbnail_url: data.thumbnail_url,
       description: data.description,
-      html: data.html,
+      src: data.src
     }).save();
   } catch (err) {
     console.log('err on addSong:', err);
@@ -70,9 +73,20 @@ export async function addSong(url) {
 
 async function getURLInfo(url) {
   try {
-    let requestUrl = `https://api.embedly.com/1/oembed?url=${url}&key=${configs.embedly_key}&width=850&height=480`;
+    let videoId = getYoutubeIdFromUrl(url);
+    // console.log('videoId:', videoId);
+    let requestUrl = `https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=${videoId}&key=${configs.youtube_key}`;
     let data = await request(requestUrl);
-    return JSON.parse(data);
+    data = JSON.parse(data);
+    let videoInfo = data.items[0].snippet;
+    // console.log('videoInfo:', videoInfo);
+    let thumbnail_url = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+    return {
+      title: videoInfo.title,
+      url,
+      thumbnail_url,
+      src: `//cdn.embedly.com/widgets/media.html?src=https://www.youtube.com/embed/${videoId}?feature=oembed&url=${url}&image=${thumbnail_url}&type=text/html&schema=youtube`,
+    }
   } catch (err) {
     throw err;
   }

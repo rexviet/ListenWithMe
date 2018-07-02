@@ -2,7 +2,8 @@ import sanitizeHtml from 'sanitize-html';
 import crypto from 'crypto';
 import queryString from 'querystring';
 
-const YTB_REG = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
+// const YTB_REG = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
+const YTB_REGEX = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export function standardize(text) {
@@ -74,5 +75,10 @@ export function isValidURL(url) {
   if(!url) {
     return false;
   }
-  return YTB_REG.test(url);
+  return YTB_REGEX.test(url);
+}
+
+export function getYoutubeIdFromUrl(url) {
+  let matches = url.match(YTB_REGEX);
+  return matches[7] && matches[7].length === 11 ? matches[7] : null;
 }

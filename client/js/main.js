@@ -42,6 +42,9 @@ function renderFistSong() {
       initPlayer()
         .then(() => resolve());
       // play();
+    } else {
+      initSocket();
+      resolve();
     }
   });
 }

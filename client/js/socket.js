@@ -10,7 +10,9 @@ function initSocket() {
     configs.isMaster = isMaster;
     if(configs.isMaster) {
       $('.btnNext').show();
-      play();
+      if(player) {
+        play();
+      }
     }
   });
 

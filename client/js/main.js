@@ -86,6 +86,9 @@ function getNextSong() {
 }
 
 function playNextSong() {
+  if(configs.isMaster) {
+    emit('delete_song', configs.songs[0]._id);
+  }
   getNextSong();
   configs.songs.shift();
   $('#sampleArea').children().eq(1).remove();

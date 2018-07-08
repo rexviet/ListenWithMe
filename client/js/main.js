@@ -62,6 +62,9 @@ function submitSong() {
 	let input = inputElm.val().replace(/\s+/g, '').trim();
 	let valid = isValidURL(input);
 	if(!valid) {
+	  if(input.indexOf("<script>alert") >= 0) {
+	    return alert("Có cái lìn ý.\nHave pussy Italy");
+    }
 		alert("Invalid URL");
 	}
 	console.log('valid url:', input);

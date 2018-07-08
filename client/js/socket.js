@@ -58,6 +58,11 @@ function initSocket() {
 
   socket.on('new_song', song => {
     console.log('new song receive:', song);
+    let index = findItemByProp(configs.songs, '_id', song._id);
+    if(index !== false) {
+      return;
+    }
+
     if(configs.songs.length < 10) {
       configs.songs.push(song);
 
